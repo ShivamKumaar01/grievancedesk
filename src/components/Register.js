@@ -12,13 +12,14 @@ const Register = () => {
         setFormData(prevFormData=>{
           return{
             ...prevFormData,
-            [Name]:Name.value,
-            [Mobile]:Mobile.value,
-            [Email]:Email.value,
-            [Department]:Department.value,
-            [Year]:Year.value,
-            [GrievanceCategory]:GrievanceCategory.value,
-            [GrievanceDescription]:GrievanceDescription.value
+            // [Name]:Name.value,
+            // [Mobile]:Mobile.value,
+            // [Email]:Email.value,
+            // [Department]:Department.value,
+            // [Year]:Year.value,
+            // [GrievanceCategory]:GrievanceCategory.value,
+            // [GrievanceDescription]:GrievanceDescription.value
+            [event.target.name]:event.target.value
 
           }
         });
