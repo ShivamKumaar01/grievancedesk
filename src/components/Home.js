@@ -1,6 +1,15 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+
+  const navigate = useNavigate();
+
+  const goToAboutPage = () => {
+    navigate('/register');
+  };
+
+
   return (
     <div>
      <div>
@@ -14,7 +23,7 @@ const Home = () => {
         </div>
         <div className='img'></div>
      </div>
-     <button>Get Started</button>
+     <button onClick={goToAboutPage}>Get Started </button>
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './Register.css'
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const[formData,setFormData]=useState({Name:"",Mobile:"",Email:"",Department:"",Year:"",GrievanceCategory:"",
@@ -30,6 +31,13 @@ const Register = () => {
         console.log(formData)
        }
       
+
+       const navigate = useNavigate();
+
+       const SuccessFunction = () => {
+         navigate('/success');
+       };
+     
     
 
 
@@ -101,7 +109,7 @@ const Register = () => {
 
          </div>
 
-         <button>Submit</button>
+         <button onClick={SuccessFunction}>Submit</button>
 
 
 

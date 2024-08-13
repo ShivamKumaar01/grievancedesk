@@ -8,6 +8,8 @@ import Feedback from './components/Feedback';
 import Register from './components/Register';
 import  Status from './components/Status';
 import Nav from './components/Nav';
+import Admin from './components/Admin';
+import Success from './components/Success'
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/status" element={<Status />} />
         <Route path="/feedback" element={<Feedback />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/success" element={<Success />} />
       </Routes>
 
      </div>

@@ -13,6 +13,7 @@ const Nav = () => {
         <li><Link to="/status">Status</Link></li>
         <li><Link to="/feedback">Feedback</Link></li>
         <li><Link to="/about">About</Link></li>
+        <li><Link to="/admin">Admin</Link></li>
 
 
         </ul>
