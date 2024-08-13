@@ -10,6 +10,7 @@ import  Status from './components/Status';
 import Nav from './components/Nav';
 import Admin from './components/Admin';
 import Success from './components/Success'
+import StatusF from './components/StatusF';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/success" element={<Success />} />
+        <Route path="/statusF" element={<StatusF />} />
       </Routes>
 
      </div>
