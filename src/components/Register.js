@@ -1,159 +1,207 @@
-import React, { useState } from 'react'
-
-import { useNavigate } from 'react-router-dom';
+import React from 'react'
+import { useState } from 'react';
 
 const Register = () => {
-    const[formData,setFormData]=useState({Name:"",Mobile:"",Email:"",Department:"",Year:"",GrievanceCategory:"",
-        GrievanceDescription:"",File:""
-    })
 
-    function changeHandler(event){
-        const{Name,Mobile,Email,Department,Year,GrievanceCategory,GrievanceDescription}=event.target
-        setFormData(prevFormData=>{
-          return{
+
+    const [formData, setFormData] = useState({
+        name: '',
+        mobile: '',
+        mentor:'',
+        gender: '',
+        email: '',
+        department: '',
+        year: '',
+        grievancecategory: '',
+        grievancedescription: '',
+      });
+      console.log(formData);
+    
+      function changeHandler(event) {
+        const { name, value, checked, type } = event.target;
+        setFormData((prevFormData) => {
+          return {
             ...prevFormData,
-            // [Name]:Name.value,
-            // [Mobile]:Mobile.value,
-            // [Email]:Email.value,
-            // [Department]:Department.value,
-            // [Year]:Year.value,
-            // [GrievanceCategory]:GrievanceCategory.value,
-            // [GrievanceDescription]:GrievanceDescription.value
-            [event.target.name]:event.target.value
-
-          }
+            [name]: type === 'checkbox' ? checked : value, // agar checkbox ka concept hota to ye handle karta 
+          };
         });
-       
+      }
     
+      // function submitHandler(event) {
+      //   event.preventDefault();
+      //   console.log('Finally printing the entire data:');
+      //   console.log(formData);
+   
+      // }
+       // Handle form submission
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    console.log("finally printing the form data");
+    console.log(formData);
+
+    try {
+      const response = await fetch('http://localhost:4000/api/v1/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        alert('Grievance Registered successfully: '+ JSON.stringify(result) );
+      } else {
+        alert('Error: ');
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
-    function submitHandler(event){
-        event.preventDefault();
-        console.log("finally printing the entire data")
-        console.log(formData)
-       }
-      
+  };
+  
+    return (
+        <div className="App">
+          <div>Register Your Grievance</div>
+          <div>
+            <form onSubmit={submitHandler}>
+              <div className="userdetails">
+                <h3>User Details</h3>
+                <br></br>
+                <label htmlFor="name">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={changeHandler}
+                  required
+                />
+                <br></br>
 
-       const navigate = useNavigate();
+                <label htmlFor="mentor">Mentor Name</label>
+                <input
+                  type="text"
+                  id="mentor"
+                  name="mentor"
+                  value={formData.mentor}
+                  onChange={changeHandler}
+                  required
+                />
+                <br></br>
 
-       const SuccessFunction = () => {
-         navigate('/success');
-       };
-     
+                <label htmlFor="mobile">Mobile</label>
+                <input
+                  type="text"
+                  id="mobile"
+                  name="mobile"
+                  value={formData.mobile}
+                  onChange={changeHandler}
+                  required
+                />
+                <br></br>
+                <div>
+                  <label>Gender</label>
+                  <input
+                    type="radio"
+                    id="male"
+                    name="gender"
+                    value="male"
+                    checked={formData.gender === 'male'}
+                    onChange={changeHandler}
+                  />
+                  <label htmlFor="male">Male</label>
+                  <input
+                    type="radio"
+                    id="female"
+                    name="gender"
+                    value="female"
+                    checked={formData.gender === 'female'}
+                    onChange={changeHandler}
+                  />
+                  <label htmlFor="female">Female</label>
+                </div>
+                <br></br>
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={changeHandler}
+                  required
+                />
+                <br></br>
     
-
-
-  return (
+                <label htmlFor="department">Department</label>
+                <select
+                  onChange={changeHandler}
+                  name="department"
+                  id="department"
+                  value={formData.department}
+                  required
+                >
+                  <option value=""></option>
+                  <option value="IT">IT</option>
+                  <option value="CSE">CSE</option>
+                  <option value="CIVIL">CIVIL</option>
+                  <option value="ECE">ECE</option>
+                  <option value="EEE">EEE</option>
+                  <option value="BCA">BCA</option>
+                  <option value="BBA">BBA</option>
+                  <option value="Mechnical">MECHNICAL</option>
+                </select>
+                <br></br>
+                <label htmlFor="year">Year</label>
+                <select
+                  onChange={changeHandler}
+                  name="year"
+                  id="year"
+                  value={formData.year}
+                  required
+                >
+                  <option value=""></option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
     
-<div class="flex justify-center items-center mt-16 flex-col gap-8">
-  <div class="text-left font-bold text-2xl" >Register Your Grievance</div>
-        
-    <div className='container1' class=" min-w-fit w-9/12 bg-slate-100 rounded-lg shadow-md p-8">
-      <h3 class="text-start font-bold text-xl">User Details</h3><br/>
-        <form onSubmit={submitHandler} >
-           <div class="flex flex-row justify-between"> 
-            <div class="text-start">
-            <label class="font-semibold">Name</label><br/>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"type="text" onChange={changeHandler} name="Name" value={formData.Name}/>
-            <br/>
-            </div>
-            <div class="text-start">
-            <label class="font-semibold">Mobile</label><br/>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" type="text"  onChange={changeHandler} name="Mobile" value={formData.Mobile}/>
-            <br/>
-            </div>
-            <div class="mt-2 text-start">
-            <label class="font-semibold">Gender</label><br/>
-            <label class="mr-3">
-            <input  type="radio" name="gender" value="male"/>
-             M
-            </label>
-            <label>
-            <input type="radio" name="gender" value="female"/> 
-            F
-          </label>
-          </div>
-          </div>
-        
-      <div class= "flex flex-row justify-between mt-2"> 
-        <div class="text-start">
-        <label class="font-semibold">Email</label><br/>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" type="email" onChange={changeHandler} name="Email" value={formData.Email}/>
-        </div>
-      
-       <div class="text-start font-semibold mr-28">
-         <label >Department</label><br/>
-         <select class="w-full max-w-md p-2 border border-gray-300 rounded-md"
-         onChange={changeHandler}
-          name="Department"
-          id='Department'
-          value={formData.Department}
-          >
-          <option value="IT">IT</option>
-          <option value="CSE">CSE</option>
-          <option value="Civil">Civil</option>
-          <option value="ECE">ECE</option>
-          <option value="Electrical">Electrical</option>
-          <option value="Mechnical">Mechnical</option>
-          <option value="BCA">BCA</option>
-          <option value="BBA">BBA</option>
-          
-         </select>
-       </div>
-         
-       <div class="text-start font-semibold">
-         <label>Year</label><br/>
-         <select class="w-full max-w-md p-2 border border-gray-300 rounded-md"
-         onChange={changeHandler}
-          name="Year"
-          id='Year'
-          value={formData.Year}
-          >
-          <option value="first">1</option>
-          <option value="second">2</option>
-          <option value="third">3</option>
-          <option value="fourth">4</option>
-         </select>
-       </div>
-       </div> 
-         </form>
-    </div>
-    <div className='Container2' class="min-w-fit w-9/12 bg-slate-100 rounded-lg shadow-md p-8">
-      <form onSubmit={submitHandler} >
-        <h4 class="text-start font-bold text-xl">Grievance Details</h4>
-        <br/>
-          <div class="text-start">
-          <label class="text-left font-semibold">Grievance Category</label><br/>
-            <select class="w-full max-w-md p-2 border border-gray-300 rounded-md"
-            onChange={changeHandler}
-            name="GrievanceCategory"
-            id='GrievanceCategory'
-            value={formData.GrievanceCategory}
-            >
-            <option value="Academic">Academic</option>
-            <option value="Non-Academic">Non-Academic</option>
-            <option value="Hostel">Hostel</option>
-
-            </select>
-            </div>
-            <br></br>
-            <div class="text-start">
-            <label class="font-semibold">Grievance Description</label><br/>
-            <textarea class="w-full h-48 p-4 border border-gray-300 rounded-md" placeholder='Describe your grievance...' onChange={changeHandler} name="GrievanceDescription" value={formData.value}/>
-            <br/>
-            </div>
-            
+                {/* Grievance Details */}
+                <div className="grievancedetails">
+                  <h3>Grievance Details</h3>
+                  <label htmlFor="grievancecategory">Grievance Category</label>
+                  <select
+                    onChange={changeHandler}
+                    name="grievancecategory"
+                    id="grievancecategory"
+                    value={formData.grievancecategory}
+                    required
+                  >
+                    <option value=""></option>
+                    <option value="academics">Academics</option>
+                    <option value="hostel">Hostel</option>
+                    <option value="administrative">Administrative</option>
+                    <option value="facility">Facility</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <br></br>
+                  <label htmlFor="grievancedescription">Grievance Description</label>
+                  <textarea
+                    id="grievancedescription"
+                    name="grievancedescription"
+                    value={formData.grievancedescription}
+                    onChange={changeHandler}
+                    required
+                  />
+                  <br></br>
+                </div>
+              </div>
+              <button type="submit">Submit</button>
             </form>
-           
-
-         </div>
-
-         <button class="bg-red-500 text-white text-1xl font-bold py-1 px-4 rounded-lg" onClick={SuccessFunction}>Submit</button>
-         <br/>
-
-         
-       </div>
-        
-  )
+          </div>
+        </div>
+      );
 }
 
 export default Register

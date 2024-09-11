@@ -1,4 +1,4 @@
-const { text } = require('express');
+
 const mongoose=require('mongoose');
 const registerSchema=new mongoose.Schema({
     name:{
@@ -12,25 +12,26 @@ const registerSchema=new mongoose.Schema({
         trim:true,
 
     },
-    contact:{
-        type:Number,
+    mobile:{
+        type:String,
         required:true,
         trim:true,
 
     },
-    dept:{
+    department:{
         type:String,
         required:true,
-        dname:["IT","ECE","CSE","Civil","EE","BCA","BBA","Mechnical"],
+        enum:["IT","ECE","CSE","Civil","EEE","BCA","BBA","Mechnical"],
     },
     year:{
-        type:Number,
+        type:String,
         required:true,
+        enum:["1","2","3","4","5"],
     },
     gender:{
         type:String,
         required:true,
-        gname:["M","F"],
+        enum:["male","female"],
     },
     mentor:{
         type:String,
@@ -38,14 +39,22 @@ const registerSchema=new mongoose.Schema({
         trim:true,
 
     },
-    category:{
+    grievancecategory:{
         type:String,
         required:true,
-        cat:["academics","hostel","nonacademics"]
+        cat:["academics","hostel","administrative","facility","other"]
     },
-    description:{
-        type:Text,
-
+    grievancedescription:{
+        type:String,
+        required:true,
     }
-})
+
+
+
+});
 module.exports = mongoose.model("Register",registerSchema );
+
+
+
+// pass  BHuwGK0afYOMmNYA
+// mongodb+srv://shivamkumaar01:<db_password>@cluster0.8iusb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0

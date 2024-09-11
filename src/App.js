@@ -12,6 +12,7 @@ import Admin from './components/Admin';
 import Success from './components/Success'
 import StatusF from './components/StatusF';
 import SignUp from './components/SignUp';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
            <a href="/" class="text-white hover:text-white">Home</a>
            <a href="/register" class="text-white hover:text-white">Register Your Grievance</a>
            <a href="/status" class="text-white hover:text-white">Check Status</a>
-           <a href="#" class="text-white hover:text-white">Feedback</a>
+           <a href="/feedback" class="text-white hover:text-white">Feedback</a>
            <a href="/about" class="text-white hover:text-white">About</a>
            <a href="/admin" class="text-white hover:text-white">Admin</a>
     </div>
@@ -55,6 +56,7 @@ function App() {
         <Route path="/success" element={<Success />} />
         <Route path="/statusF" element={<StatusF />} />
         <Route path="/adminsignup" element={<SignUp />} />
+        <Route path="/dashboard" element={<Dashboard/>} />
 
       </Routes>
 
