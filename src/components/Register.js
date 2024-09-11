@@ -60,15 +60,16 @@ const Register = () => {
   };
   
     return (
-        <div className="App">
-          <div>Register Your Grievance</div>
+      <div class="flex justify-center items-center mt-10 flex-col gap-8 mb-10">
+        <div className="App"class=" min-w-fit w-9/12 bg-slate-100 rounded-lg shadow-md p-8">
+          <div class="text-left font-bold text-1xl"> Register Your Grievance</div>
           <div>
             <form onSubmit={submitHandler}>
-              <div className="userdetails">
-                <h3>User Details</h3>
+              <div class="mt-10" className="userdetails" >
+                <h3 class="text-left font-medium ">User Details</h3>
                 <br></br>
                 <label htmlFor="name">Name</label>
-                <input
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="text"
                   id="name"
                   name="name"
@@ -79,7 +80,7 @@ const Register = () => {
                 <br></br>
 
                 <label htmlFor="mentor">Mentor Name</label>
-                <input
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="text"
                   id="mentor"
                   name="mentor"
@@ -90,7 +91,7 @@ const Register = () => {
                 <br></br>
 
                 <label htmlFor="mobile">Mobile</label>
-                <input
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="text"
                   id="mobile"
                   name="mobile"
@@ -122,7 +123,7 @@ const Register = () => {
                 </div>
                 <br></br>
                 <label htmlFor="email">Email</label>
-                <input
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="email"
                   id="email"
                   name="email"
@@ -133,7 +134,7 @@ const Register = () => {
                 <br></br>
     
                 <label htmlFor="department">Department</label>
-                <select
+                <select class="w-full max-w-md p-2 border border-gray-300 rounded-md"
                   onChange={changeHandler}
                   name="department"
                   id="department"
@@ -152,7 +153,7 @@ const Register = () => {
                 </select>
                 <br></br>
                 <label htmlFor="year">Year</label>
-                <select
+                <select class="w-full max-w-md p-2 border border-gray-300 rounded-md"
                   onChange={changeHandler}
                   name="year"
                   id="year"
@@ -168,10 +169,10 @@ const Register = () => {
                 </select>
     
                 {/* Grievance Details */}
-                <div className="grievancedetails">
-                  <h3>Grievance Details</h3>
+                <div class="mt-5 " className="grievancedetails">
+                  <h3 class="text-left font-medium ">Grievance Details</h3>
                   <label htmlFor="grievancecategory">Grievance Category</label>
-                  <select
+                  <select class="w-full max-w-md p-2 border border-gray-300 rounded-md"
                     onChange={changeHandler}
                     name="grievancecategory"
                     id="grievancecategory"
@@ -187,7 +188,7 @@ const Register = () => {
                   </select>
                   <br></br>
                   <label htmlFor="grievancedescription">Grievance Description</label>
-                  <textarea
+                  <textarea class="w-full h-48 p-4 border border-gray-300 rounded-md"
                     id="grievancedescription"
                     name="grievancedescription"
                     value={formData.grievancedescription}
@@ -197,9 +198,10 @@ const Register = () => {
                   <br></br>
                 </div>
               </div>
-              <button type="submit">Submit</button>
+              <button  class="bg-red-500 text-white text-1xl font-bold py-1 px-4 rounded-lg"type="submit">Submit</button>
             </form>
           </div>
+        </div>
         </div>
       );
 }
