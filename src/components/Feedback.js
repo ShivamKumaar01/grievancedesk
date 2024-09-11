@@ -2,7 +2,7 @@ import React from 'react'
 
 const Feedback = () => {
   return (
-    <div>this is your feedback page</div>
+    <div>Sorry, We don't want any feedback</div>
   )
 }
 

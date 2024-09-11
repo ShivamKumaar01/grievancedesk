@@ -64,12 +64,15 @@ const Register = () => {
       <div class="flex justify-center items-center mt-10 flex-col gap-8 mb-10">
         <div className="App"class=" min-w-fit w-9/12 bg-slate-100 rounded-lg shadow-md p-8">
           <div class="text-left font-bold text-1xl"> Register Your Grievance</div>
+          <br></br>
           <div>
             <form onSubmit={submitHandler}>
               <div class="mt-10" className="userdetails" >
                 <h3 class="text-left font-medium ">User Details</h3>
                 <br></br>
-                <label htmlFor="name">Name</label>
+                <div class="flex flex-row justify-around">
+                <div class="text-start">
+                <label  htmlFor="name">Name</label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="text"
                   id="name"
@@ -78,8 +81,10 @@ const Register = () => {
                   onChange={changeHandler}
                   required
                 />
+                </div>
                 <br></br>
-
+                
+                <div class="text-start">
                 <label htmlFor="mentor">Mentor Name</label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="text"
@@ -89,9 +94,12 @@ const Register = () => {
                   onChange={changeHandler}
                   required
                 />
+                </div>
+                
                 <br></br>
-
-                <label htmlFor="mobile">Mobile</label>
+                
+                <div class="text-start">
+                <label  htmlFor="mobile">Mobile</label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="text"
                   id="mobile"
@@ -100,9 +108,44 @@ const Register = () => {
                   onChange={changeHandler}
                   required
                 />
+                </div>
+                </div>
                 <br></br>
-                <div>
-                  <label>Gender</label>
+
+              <div class="flex flex-row ">
+               
+
+                <br></br>
+
+                <div class="text-start ml-2" >
+                <label  htmlFor="urn">URN</label>
+                <br></br>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  type="text"
+                  id="urn"
+                  name="urn"
+                  value={formData.urn}
+                  onChange={changeHandler}
+                  required
+                />
+                </div>
+                <br></br>
+
+                 <div class="text-start mr-24 ml-16">
+                <label  htmlFor="email">Email</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={changeHandler}
+                  required
+                />
+                </div>
+
+                <div class="text-start">
+                  <label >Gender</label>
+                  <br></br>
                   <input
                     type="radio"
                     id="male"
@@ -111,8 +154,8 @@ const Register = () => {
                     checked={formData.gender === 'male'}
                     onChange={changeHandler}
                   />
-                  <label htmlFor="male">Male</label>
-                  <input
+                  <label class="mr-5" htmlFor="male">Male</label>
+                  <input 
                     type="radio"
                     id="female"
                     name="gender"
@@ -123,29 +166,11 @@ const Register = () => {
                   <label htmlFor="female">Female</label>
                 </div>
                 <br></br>
-                <label htmlFor="urn">URN</label>
-                <input
-                  type="text"
-                  id="urn"
-                  name="urn"
-                  value={formData.urn}
-                  onChange={changeHandler}
-                  required
-                />
-                <br></br>
-
-                <label htmlFor="email">Email</label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={changeHandler}
-                  required
-                />
-                <br></br>
-    
-                <label htmlFor="department">Department</label>
+                </div>
+<br></br>
+                <div class="flex ">
+                <div class="text-start ml-2">
+                <label  htmlFor="department">Department</label>
                 <select class="w-full max-w-md p-2 border border-gray-300 rounded-md"
                   onChange={changeHandler}
                   name="department"
@@ -161,10 +186,13 @@ const Register = () => {
                   <option value="EEE">EEE</option>
                   <option value="BCA">BCA</option>
                   <option value="BBA">BBA</option>
-                  <option value="Mechnical">MECHNICAL</option>
+                  <option value="Mechnical">MECHANICAL</option>
                 </select>
+                </div>
+
                 <br></br>
-                <label htmlFor="year">Year</label>
+                <div class="text-start ml-10">
+                <label  htmlFor="year">Year</label>
                 <select class="w-full max-w-md p-2 border border-gray-300 rounded-md"
                   onChange={changeHandler}
                   name="year"
@@ -179,11 +207,16 @@ const Register = () => {
                   <option value="4">4</option>
                   <option value="5">5</option>
                 </select>
-    
+                </div>
+                </div>
+<br></br>
                 {/* Grievance Details */}
                 <div class="mt-5 " className="grievancedetails">
                   <h3 class="text-left font-medium ">Grievance Details</h3>
+                  <br></br>
+                  <div class="text-left">
                   <label htmlFor="grievancecategory">Grievance Category</label>
+                  <br></br>
                   <select class="w-full max-w-md p-2 border border-gray-300 rounded-md"
                     onChange={changeHandler}
                     name="grievancecategory"
@@ -198,7 +231,10 @@ const Register = () => {
                     <option value="facility">Facility</option>
                     <option value="other">Other</option>
                   </select>
+                  </div>
                   <br></br>
+
+                  <div class="text-left">
                   <label htmlFor="grievancedescription">Grievance Description</label>
                   <textarea class="w-full h-48 p-4 border border-gray-300 rounded-md"
                     id="grievancedescription"
@@ -207,10 +243,11 @@ const Register = () => {
                     onChange={changeHandler}
                     required
                   />
+                  </div>
                   <br></br>
                 </div>
               </div>
-              <button  class="bg-red-500 text-white text-1xl font-bold py-1 px-4 rounded-lg"type="submit">Submit</button>
+              <button  class="bg-red-500 text-white text-1xl font-bold py-1 px-4 rounded-lg mt-6"type="submit">Submit</button>
             </form>
           </div>
         </div>
