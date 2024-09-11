@@ -18,6 +18,12 @@ const registerSchema=new mongoose.Schema({
         trim:true,
 
     },
+    urn:{
+        type:String,
+        required:true,
+        trim:true,
+
+    },
     department:{
         type:String,
         required:true,
