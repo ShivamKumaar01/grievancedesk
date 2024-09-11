@@ -14,6 +14,7 @@ const Register = () => {
         year: '',
         grievancecategory: '',
         grievancedescription: '',
+        urn:''
       });
       console.log(formData);
     
@@ -121,6 +122,17 @@ const Register = () => {
                   <label htmlFor="female">Female</label>
                 </div>
                 <br></br>
+                <label htmlFor="urn">URN</label>
+                <input
+                  type="text"
+                  id="urn"
+                  name="urn"
+                  value={formData.urn}
+                  onChange={changeHandler}
+                  required
+                />
+                <br></br>
+
                 <label htmlFor="email">Email</label>
                 <input
                   type="email"
