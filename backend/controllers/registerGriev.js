@@ -42,12 +42,21 @@ exports.registerGriev=async (req,res)=>{
 
 // THis is for admin signup
 exports.adminSignup=async(req,res)=>{
+    
     try{
-        const{name,email,designation,password}=req.body;
+        const{name,email,designation,password,adminCode}=req.body;
+        if(adminCode !== process.env.ADMIN_CODE){
+            return res.json({
+                success:false,
+                message:"Unauthorized"
+            })
+        }
+        console.log(process.env.ADMIN_CODE);
+
         // check karo user already exist hai ki nahi
         const existingAdmin = await Admin.findOne({email});
         if(existingAdmin){
-            res.status.json({
+            return res.status(404).json({
                 success:false,
                 message:"Admin already exist"
             })
@@ -81,8 +90,7 @@ exports.adminSignup=async(req,res)=>{
         return res.status(404).json({
             success:false,
             message:"please try later to signup"
-        })
-        
+        }) 
     }
 }
 
@@ -137,21 +145,20 @@ exports.adminLogin=async(req,res)=>{
 
 // controllers for fetching data from backend
 exports.fetchingData=async(req,res)=>{
-    try{
-        const data=await Register.find();
+    try {
+        const data = await Register.find();
         console.log(data);
-        res.json(data);
+       
         res.status(200).json({
-            success:true,
-            message:"data fetched successfully"
-        })
-
-    }
-    catch(error){
+            success: true,
+            data: data,
+            message: "Data fetched successfully"
+        });
+    } catch (error) {
         console.error(error);
         res.status(404).json({
-            success:false,
-            message:"There is something error in fetching data"
-        })
+            success: false,
+            message: "There is something wrong in fetching data"
+        });
     }
 }
