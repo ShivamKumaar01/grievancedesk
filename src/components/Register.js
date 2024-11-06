@@ -67,7 +67,7 @@ const goToSuccess=()=>{
   };
   
     return (
-      <div class="flex justify-center items-center mt-10 flex-col gap-8 mb-10">
+      <div className="flex justify-center items-center mt-10 flex-col gap-8 mb-10">
         <div className="App"class=" min-w-fit w-9/12 bg-slate-100 rounded-lg shadow-md p-8">
           <div class="text-left font-bold text-1xl"> Register Your Grievance</div>
           <br></br>
@@ -253,7 +253,7 @@ const goToSuccess=()=>{
                   <br></br>
                 </div>
               </div>
-              <button  class="bg-red-500 text-white text-1xl font-bold py-1 px-4 rounded-lg mt-6"type="submit" onClick={goToSuccess}>Submit</button>
+              <button  class="bg-red-500 text-white text-1xl font-bold py-1 px-4 rounded-lg mt-6"type="submit">Submit</button>
             </form>
           </div>
         </div>
