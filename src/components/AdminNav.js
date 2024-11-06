@@ -63,13 +63,15 @@ const AdminNav = () => {
 
   return (
     <div>
-      <nav>
-        <ul>
-          <button onClick={() => handleClick('All')}>All</button><br />
-          <button onClick={() => handleClick('Academics')}>Academics</button><br />
-          <button onClick={() => handleClick('Hostel')}>Hostel</button><br />
-          <button onClick={() => handleClick('Facility')}>Facility</button><br />
-          <button onClick={() => handleClick('Other')}>Other</button>
+      <nav class="bg-red-500 p-2">
+        <ul class="container mx-auto flex justify-between items-center">
+          <div class="hidden md:flex space-x-8"> 
+          <li><button onClick={() => handleClick('All')}>All</button><br /></li>
+          <li><button onClick={() => handleClick('Academics')}>Academics</button><br /></li>
+          <li><button onClick={() => handleClick('Hostel')}>Hostel</button><br /></li>
+          <li><button onClick={() => handleClick('Facility')}>Facility</button><br /></li>
+          <li><button onClick={() => handleClick('Other')}>Other</button></li>
+          </div>
         </ul>
       </nav>
       <div>

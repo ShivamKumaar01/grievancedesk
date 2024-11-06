@@ -2,7 +2,7 @@ const Register=require("../models/Register");
 const Admin=require("../models/Admin");
 
 
-const bcrypt=require("bcrypt");
+const bcrypt=require("bcryptjs");
 const jwt = require('jsonwebtoken');
 
 
@@ -68,6 +68,7 @@ exports.adminSignup=async(req,res)=>{
 
         }
         catch(error){
+            
             return res.status(500).json({
                 success:false,
                 message:"error in hashing password"

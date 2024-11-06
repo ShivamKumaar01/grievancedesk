@@ -62,22 +62,26 @@ const Dashboard = () => {
 
   return (
     <div>
+      <br></br>
+      {/* <AdminNav/> */}
       
-      <AdminNav/>
-      <h3>Welcome Admin</h3>
       
       <div className="container-list">
         {loading ? (
           <h1>Loading...</h1>  // Show loading indicator while fetching data
         ) : posts.length > 0 ? (
           posts.map((postItem, index) => (
-            <div className="post-item" key={index}>
-              <h3>Name:{postItem.name}</h3>
-              <h3>Department:{postItem.department}</h3>
-              <h3>Griev-Category:{postItem.grievancecategory}</h3>
-              <h3>Griev-Dis:{postItem.grievancedescription}</h3>
-              {/* dropdown hoga jo registered ,processed and resolved dikhayega */}
-              {/* adminform hoga jo dropdkown ,some text field and delaed by dikhayega */}
+            <div class="flex justify-center items-center mt-10" >
+            <div class="w-7/12 bg-slate-100 rounded-lg shadow-md p-4" key={index}>
+
+              
+              <h3 className='text-left font-bold'>{postItem.grievancecategory}</h3>
+              <h3 className='text-left font-thin'>Name: {postItem.name}</h3>
+              <h3 className='text-left font-thin' >URN: {postItem.urn}</h3>
+              <h3 className='text-left font-thin '>Department: {postItem.department}</h3>
+              <h3 className='text-left font-thin'>Description: {postItem.grievancedescription}</h3>
+              
+             </div>
               
 
             </div>

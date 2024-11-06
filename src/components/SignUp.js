@@ -31,11 +31,33 @@ const SignUp = () => {
     })
   }
 
-  const AsubmitHandler=async(e)=>{
+  const AsubmitHandler = async (e)=>{
     e.preventDefault();
     console.log('finally printing the admin signup data');
     console.log(FormData);
-  }
+   
+
+
+    try {
+      const response = await fetch('http://localhost:4000/api/v1/adminsingup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(FormData),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        alert('admin created sucessfully: '+ JSON.stringify(result) );
+      } else {
+        alert('Error: ');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+
+  };
  
 
   
@@ -77,7 +99,7 @@ const SignUp = () => {
             
 
         </form> <br></br>
-        <button type='submit'  class="bg-red-500 text-white font-bold py-1 px-4 rounded-lg">Create Account</button>
+        <button class="bg-red-500 text-white font-bold py-1 px-4 rounded-lg" type="submit" >Create Account</button>
         <ToastContainer/>
         </div>
         </div>
