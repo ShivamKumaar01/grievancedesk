@@ -9,8 +9,8 @@ const SignUp = () => {
   const[FormData,setFormData]=useState({
     adminemail:'',
     adminPassword:'',
-    designation:''
-
+    designation:'',
+    adminCode:''
   })
   console.log(FormData);
 
@@ -35,7 +35,6 @@ const SignUp = () => {
     e.preventDefault();
     console.log('finally printing the admin signup data');
     console.log(FormData);
-
   }
  
 
@@ -71,6 +70,10 @@ const SignUp = () => {
             <option value="academics">Academics</option>
             <option value="non-academics">Non-Academics</option>
             </select>
+
+            <label class="block text-gray-700 text-sm  text-start mt-2">Admin Code</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
+               type="password" name="adminCode" onChange={signupHandler} value={FormData.adminCode} required/><br></br>
             
 
         </form> <br></br>
