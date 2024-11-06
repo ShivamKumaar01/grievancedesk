@@ -67,9 +67,9 @@ const SignUp = () => {
               required
             >
             <option value=""></option>
-            <option value="hostel">Hostel</option>
-            <option value="academics">Academics</option>
-            <option value="non-academics">Non-Academics</option>
+            <option value="hostel">Hostel Authority</option>
+            <option value="academics">Grievance Committee</option>
+            <option value="non-academics">Mentor</option>
             </select>
             
 

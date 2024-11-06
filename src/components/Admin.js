@@ -11,6 +11,7 @@ const goToDashboard=()=>{
   const goToaAdminSignUp = () => {
     navigate('/adminsignup');
   };
+  
   return (
   <div class="flex justify-center items-center mt-16">
     <div class=" bg-slate-100 rounded-lg shadow-md p-8">

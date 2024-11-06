@@ -1,7 +1,13 @@
 import React from 'react'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+
+  const navigate = useNavigate();
+const goToSuccess=()=>{ 
+  navigate('/success');
+}
 
 
     const [formData, setFormData] = useState({
@@ -247,7 +253,7 @@ const Register = () => {
                   <br></br>
                 </div>
               </div>
-              <button  class="bg-red-500 text-white text-1xl font-bold py-1 px-4 rounded-lg mt-6"type="submit">Submit</button>
+              <button  class="bg-red-500 text-white text-1xl font-bold py-1 px-4 rounded-lg mt-6"type="submit" onClick={goToSuccess}>Submit</button>
             </form>
           </div>
         </div>
