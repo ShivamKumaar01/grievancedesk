@@ -13,6 +13,7 @@ import Success from './components/Success'
 import StatusF from './components/StatusF';
 import SignUp from './components/SignUp';
 import Dashboard from './components/Dashboard';
+import CardDetails from './components/CardDetails';
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
         <Route path="/statusF" element={<StatusF />} />
         <Route path="/adminsignup" element={<SignUp />} />
         <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path='/carddetails' element={<CardDetails/>} />
 
       </Routes>
 

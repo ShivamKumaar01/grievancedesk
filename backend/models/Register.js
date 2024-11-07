@@ -53,6 +53,10 @@ const registerSchema=new mongoose.Schema({
     grievancedescription:{
         type:String,
         required:true,
+    },
+    grievstatus:{
+        type:String,
+        enum:["0","1"]
     }
 
 

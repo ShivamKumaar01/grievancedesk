@@ -3,14 +3,14 @@ const Admin=require("../models/Admin");
 
 
 const bcrypt=require("bcryptjs");
-const bcrypt=require("bcryptjs");
+
 const jwt = require('jsonwebtoken');
 
 
 // this is for register grievance
 exports.registerGriev=async (req,res)=>{
     try{
-        const{name,email,mobile,department,gender, mentor,grievancecategory,grievancedescription,year,urn}=req.body;
+        const{name,email,mobile,department,gender, mentor,grievancecategory,grievancedescription,year,urn,grievstatus=0}=req.body;
         // validate 
         if(!name || !email || !mobile|| !department || !gender || !mentor ||!grievancecategory || !grievancedescription ||!year ||!urn){
             return res.status(400).json({
@@ -18,7 +18,7 @@ exports.registerGriev=async (req,res)=>{
                 message:"Please fill in all fields"
             });
         }
-        const response = await Register.create({name,email,mobile,department,gender, mentor,grievancecategory,grievancedescription,year,urn});
+        const response = await Register.create({name,email,mobile,department,gender, mentor,grievancecategory,grievancedescription,year,urn,grievstatus});
         res.status(200).json(
             {
                 success:true,
