@@ -45,6 +45,7 @@ const goToSuccess=()=>{
     e.preventDefault();
     console.log("finally printing the form data");
     console.log(formData);
+    goToSuccess();
 
     try {
       const response = await fetch('http://localhost:4000/api/v1/register', {

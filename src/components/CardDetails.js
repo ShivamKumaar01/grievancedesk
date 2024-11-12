@@ -13,6 +13,10 @@ const CardDetails = () => {
         <h3 className="text-left font-thin">URN: {post.urn}</h3>
         <h3 className="text-left font-thin">Department: {post.department}</h3>
         <h3 className="text-left font-thin">Description: {post.grievancedescription}</h3>
+        <h3 className="text-left font-thin">id: {post._id}</h3>
+        {/* processing pr click karne pr status ko 0 kar do and resolved par click karne par status ko 1 kar do */}
+        <button  class="bg-red-500 text-white text-1xl font-bold py-1 px-4 rounded-lg mt-6">processing</button><br></br>
+        <button  class="bg-red-500 text-white text-1xl font-bold py-1 px-4 rounded-lg mt-6">resolved</button>
         {/* Display more details if needed */}
       </div>
     </div>

@@ -1,36 +1,69 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 
 const StatusF = () => {
+  const [grievanceData, setGrievanceData] = useState(null); // State to store fetched data
+
+  // Fetch the data from the API based on a specific ID
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/api/v1/register/672b51e10f21c33910e1ae2a'); // Replace with the ID you need
+        const data = await response.json();
+        
+        console.log(data); // Log the response to check the data structure
+
+        // Check if the response contains data and set it
+        if (data.success && data.data) {
+          setGrievanceData(data.data); // Set the single object, not an array
+        } else {
+          console.error('No data found');
+        }
+      } catch (error) {
+        console.error('Error fetching grievance data:', error);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array to run this effect only once
+
+  // If data is not fetched yet, display loading text
+  if (!grievanceData) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div>
-        <h3>Grievance Status</h3>
-        <div>
-          <div className='left1'>
-            <p>Registration ID:#12345</p>
-            <p>Date Submitted:#12/08/2024</p>
-          </div>
-          <div className='right1'>
-            <p>Complainant Name:#12345</p>
-            <p>Category of Grievance:#academics</p>
-          </div>
+    <div className="p-8 bg-slate-100 rounded-lg shadow-md">
+      <h3 className="text-2xl font-bold text-center mb-4">Grievance Status</h3>
+      
+      {/* Left and Right sections for registration details */}
+      <div className="flex justify-between mb-4">
+        <div className="left1">
+          <p><strong>Registration ID:</strong> #{grievanceData._id}</p>
+          <p><strong>Date Submitted:</strong> {new Date(grievanceData.createdAt).toLocaleDateString()}</p>
         </div>
-        <h5>Current Status:Solved</h5>
-        <div>
-         <div className='left2'>
-          <p>Dealt by:prof.Akshay Girdhar</p>
-          <p>Mobile:1234567890</p>
-
-         </div>
-         <div className='right2'>
-            <p>Designation:Department Head</p>
-            <p>Mail:shk@gndec.ac.in</p>
-         </div>
+        <div className="right1">
+          <p><strong>Complainant Name:</strong> {grievanceData.name}</p>
+          <p><strong>Category of Grievance:</strong> {grievanceData.grievancecategory}</p>
         </div>
-        <input type='textbox'></input>
+      </div>
 
+      <h5 className="font-bold">Current Status: {grievanceData.grievstatus === '1' ? 'Solved' : 'Pending'}</h5>
 
+      {/* Left and Right sections for the person handling the grievance */}
+      <div className="flex justify-between mt-4">
+        <div className="left2">
+          <p><strong>Dealt by:</strong> {grievanceData.mentor}</p>
+          <p><strong>Mobile:</strong> {grievanceData.mobile}</p>
+        </div>
+        <div className="right2">
+          <p><strong>Designation:</strong> Department Head</p>
+          <p><strong>Mail:</strong> {grievanceData.email}</p>
+        </div>
+      </div>
+
+     
     </div>
-  )
-}
+  );
+};
 
-export default StatusF
+export default StatusF;

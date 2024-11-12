@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 // this is for register grievance
 exports.registerGriev=async (req,res)=>{
     try{
-        const{name,email,mobile,department,gender, mentor,grievancecategory,grievancedescription,year,urn,grievstatus=0}=req.body;
+        const{name,email,mobile,department,gender, mentor,grievancecategory,grievancedescription,year,urn,grievstatus=-1}=req.body;
         // validate 
         if(!name || !email || !mobile|| !department || !gender || !mentor ||!grievancecategory || !grievancedescription ||!year ||!urn){
             return res.status(400).json({
@@ -233,3 +233,32 @@ exports.fetchingData=async(req,res)=>{
         });
     }
 }
+
+// Controller to fetch data by ID
+exports.fetchDataById = async (req, res) => {
+    try {
+      const { id } = req.params; // Get ID from URL parameters
+  
+      // Fetch the document by ID
+      const data = await Register.findById(id);
+  
+      if (!data) {
+        return res.status(404).json({
+          success: false,
+          message: 'Data not found'
+        });
+      }
+  
+      res.status(200).json({
+        success: true,
+        data: data,
+        message: 'Data fetched successfully'
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        success: false,
+        message: 'There was an error fetching the data'
+      });
+    }
+  }

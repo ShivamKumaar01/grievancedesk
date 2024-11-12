@@ -104,7 +104,7 @@ const Dashboard = () => {
       <div className="container-list">
         {loading ? (
           <h1>Loading...</h1>
-        ) : posts.length > 0 ? (
+        ) : posts.length > 0  ? (
           posts.map((postItem, index) => (
             <div
               key={index}
@@ -118,6 +118,7 @@ const Dashboard = () => {
                 <h3 className="text-left font-thin">URN: {postItem.urn}</h3>
                 <h3 className="text-left font-thin">Department: {postItem.department}</h3>
                 <h3 className="text-left font-thin">Description: {postItem.grievancedescription}</h3>
+                <h3 className="text-left font-thin">ID: {postItem._id}</h3>
               </div>
             </div>
           ))
