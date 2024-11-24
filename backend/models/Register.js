@@ -57,7 +57,16 @@ const registerSchema=new mongoose.Schema({
     grievstatus:{
         type:String,
         enum:["0","1","-1"]
+    },
+    comment:{
+        type:String,
+
+    },
+    flag:{
+        type:Boolean,
     }
+
+   
 
 
 
