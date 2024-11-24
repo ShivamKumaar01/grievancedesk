@@ -229,9 +229,11 @@ const SignUp = () => {
             required
           >
             <option value=""></option>
-            <option value="Hostel">Hostel Authority</option>
-            <option value="Academics">Grievance Committee</option>
-            <option value="Mentor">Mentor</option>
+            <option value="hostel">Hostel </option>
+            <option value="academics">Academics</option>
+            <option value="other">Other</option>
+            <option value="administrative">Administrative</option>
+            <option value="facility">Facility</option>
           </select>
 
           <label className="block text-gray-700 text-sm text-start mt-2">Admin Code</label>

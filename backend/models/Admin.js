@@ -10,11 +10,17 @@ const adminSchema=new mongoose.Schema({
         required:true,
         trim:true,
     },
+    // designation:{
+    //     type:String,
+    //     required:true,
+    //     enum:["Mentor","Hostel","Academics"]
+    // },
     designation:{
         type:String,
         required:true,
-        enum:["Mentor","Hostel","Academics"]
+        enum:["academics","hostel","administrative","facility","other"]
     },
+
     password:{
         type:String,
         required:true,
@@ -37,6 +43,9 @@ const Adminlogin=new mongoose.Schema({
     
     
 })
+
+
+
 module.exports=mongoose.model("Alogin",Adminlogin)
 module.exports=mongoose.model("Admin",adminSchema)
 

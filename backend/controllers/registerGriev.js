@@ -338,3 +338,42 @@ exports.updateGrievanceStatusAndComment = async (req, res) => {
       res.status(500).json({ message: 'Internal Server Error', error });
     }
   };
+
+
+//   fetch data by designation
+exports.fetchDataByGrievanceCategory = async (req, res) => {
+    try {
+        const { grievancecategory } = req.params; // Use grievancecategory instead of designation
+        console.log("Received grievancecategory:", grievancecategory); // Log for debugging
+
+        if (!grievancecategory) {
+            return res.status(400).json({
+                success: false,
+                message: "Grievance category is required",
+            });
+        }
+
+        // Query using grievancecategory
+        const data = await Register.find({ grievancecategory: new RegExp(`^${grievancecategory}$`, "i") });
+        console.log("Query Result:", data); // Log the query result
+
+        if (!data.length) {
+            return res.status(404).json({
+                success: false,
+                message: "No records found for this grievance category",
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Data fetched successfully",
+            data,
+        });
+    } catch (error) {
+        console.error("Error fetching data by grievance category:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Server error, please try again later",
+        });
+    }
+};
