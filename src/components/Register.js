@@ -41,12 +41,37 @@ const goToSuccess=()=>{
    
       // }
        // Handle form submission
+  // const submitHandler = async (e) => {
+  //   e.preventDefault();
+  //   console.log("finally printing the form data");
+  //   console.log(formData);
+  //   goToSuccess();
+
+  //   try {
+  //     const response = await fetch('http://localhost:4000/api/v1/register', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(formData),
+  //     });
+
+  //     if (response.ok) {
+  //       const result = await response.json();
+  //       alert('Grievance Registered successfully: '+ JSON.stringify(result) );
+  //     } else {
+  //       alert('Error: ');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   }
+  // };
+
   const submitHandler = async (e) => {
     e.preventDefault();
     console.log("finally printing the form data");
     console.log(formData);
-    goToSuccess();
-
+  
     try {
       const response = await fetch('http://localhost:4000/api/v1/register', {
         method: 'POST',
@@ -55,15 +80,21 @@ const goToSuccess=()=>{
         },
         body: JSON.stringify(formData),
       });
-
+  
       if (response.ok) {
         const result = await response.json();
-        alert('Grievance Registered successfully: '+ JSON.stringify(result) );
+        const registrationId = result.data._id; // Extract the registration ID from the API response
+        
+        // alert('Grievance Registered successfully: ' + JSON.stringify(result));
+        
+        // Navigate to the "After" component and pass the registrationId
+        navigate('/success', { state: { registrationId } });
       } else {
-        alert('Error: ');
+        alert('Error: Unable to register grievance.');
       }
     } catch (error) {
       console.error('Error:', error);
+      alert('An error occurred. Please try again.');
     }
   };
   

@@ -36,23 +36,62 @@
 
 
 
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Admin = () => {
-  const [designation, setDesignation] = useState(''); // State for dropdown
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
+
   const navigate = useNavigate();
 
-  const goToDashboard = () => {
-    if (designation) {
-      navigate('/dashboard', { state: { designation } }); // Pass selected designation
-    } else {
-      alert('Please select a designation.');
+
+  // DESIGNATION
+  const getDesignation = async()=>{
+    if(!email || !password){
+      alert("please fill details");
+      return;
     }
-  };
+    const response = await fetch('http://localhost:4000/api/v1/getdesignation', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({email:email,password:password}),
+    });
+    const data = await response.json();
+    if(!data.success){
+      alert(data.message);
+      return;
+    }
+
+    if(data.designation) {
+      navigate('/dashboard', { state: { designation  : data.designation } }); // Pass selected designation
+    }
+    else{
+      alert("error..");
+    }
+  }
+
+
+
+
+  // // DASHBOARD
+  // const goToDashboard = async() => {
+  //   await getDesignation();
+  //   if (designation) {
+  //     navigate('/dashboard', { state: { designation } }); // Pass selected designation
+  //   }
+  // };
+
+
+
+  // SIGNUP
   const goToaAdminSignUp = () => {
-        navigate('/adminsignup');
-       };
+      navigate('/adminsignup');
+  };
+
+
 
   return (
     <div className="flex justify-center items-center mt-16">
@@ -63,6 +102,8 @@ const Admin = () => {
             className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="text"
             name="username"
+            value={email}
+            onChange={(e)=>setEmail(e.target.value)}
           />
           <br />
           <label className="block text-gray-700 text-sm mt-4 text-start">Password</label>
@@ -70,10 +111,12 @@ const Admin = () => {
             className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="password"
             name="password"
+            value={password}
+            onChange={(e)=>setPassword(e.target.value)}
           />
           <br />
 
-          {/* Dropdown for designation */}
+          {/* Dropdown for designation
           <label className="block text-gray-700 text-sm mt-4 text-start">Select Designation</label>
           <select
             value={designation}
@@ -87,10 +130,10 @@ const Admin = () => {
             <option value="administrative">Administrative</option>
             <option value="facility">Facility</option>
             
-          </select>
+          </select> */}
         </form>
         <br />
-        <button onClick={goToDashboard} className="bg-red-500 text-white font-bold py-1 px-4 rounded-lg">
+        <button onClick={getDesignation} className="bg-red-500 text-white font-bold py-1 px-4 rounded-lg">
           Login
         </button>
         <div><button onClick={goToaAdminSignUp}>Sign Up/Forgot Password</button></div>

@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 // this is for register grievance
 exports.registerGriev=async (req,res)=>{
     try{
-        const{name,email,mobile,department,gender, mentor,grievancecategory,grievancedescription,year,urn,grievstatus=-1,comment="",flag=0}=req.body;
+        const{name,email,mobile,department,gender, mentor,grievancecategory,grievancedescription,year,urn,grievstatus=-1,comment="",flag=0,dealtby=""}=req.body;
         // validate 
         if(!name || !email || !mobile|| !department || !gender || !mentor ||!grievancecategory || !grievancedescription ||!year ||!urn){
             return res.status(400).json({
@@ -18,7 +18,7 @@ exports.registerGriev=async (req,res)=>{
                 message:"Please fill in all fields"
             });
         }
-        const response = await Register.create({name,email,mobile,department,gender, mentor,grievancecategory,grievancedescription,year,urn,grievstatus,comment,flag});
+        const response = await Register.create({name,email,mobile,department,gender, mentor,grievancecategory,grievancedescription,year,urn,grievstatus,comment,flag,dealtby});
         res.status(200).json(
             {
                 success:true,
@@ -165,6 +165,53 @@ exports.adminSignup = async (req, res) => {
     }
 };
 
+// get admin designation
+exports.getDesignation = async(req,res) => {
+
+  try{
+    const{email,password}=req.body;
+    if(!email || !password ){
+      return res.status(400).json({
+          success:false,
+          message:"please fill all the details"
+      })
+    }
+
+    // check if admin exist or not
+    const admin =await Admin.findOne({email});
+    if(!admin){
+        return res.status(400).json({
+            success:false,
+            message:"invalid email or password"
+        })
+    }
+    else{
+        // check if password is correct or not
+        const isMatch =await bcrypt.compare(password,admin.password)
+        if(!isMatch){
+            return res.status(400).json({
+                success:false,
+                message:"invalid email or password"
+            })
+        }
+        else{
+          return res.status(200).json({
+            success:true,
+            name:admin.name,
+            designation:admin.designation
+          })
+        }
+    }
+  }
+  catch(error){
+      console.error(error);
+        return res.status(404).json({
+            success:false,
+            message:"please try later to login"
+        })
+  }
+}
+
 // This is for admin Login
 exports.adminLogin=async(req,res)=>{
     try{
@@ -301,23 +348,67 @@ exports.fetchDataById = async (req, res) => {
 //   };
 
 
+// exports.updateGrievanceStatusAndComment = async (req, res) => {
+//     try {
+//       const { id } = req.params; // Grievance ID from the URL
+//       const { comment, grievstatus } = req.body; // Extract comment and grievstatus from the request body
+  
+//       // Validate input
+//       if (!id || comment === undefined || grievstatus === undefined) {
+//         return res.status(400).json({ message: 'ID, comment, and grievstatus are required.' });
+//       }
+  
+//       // Find and update the grievance by ID
+//       const updatedGrievance = await Register.findByIdAndUpdate(
+//         id,
+//         { 
+//           $set: { 
+//             comment, // Update comment
+//             grievstatus, // Update grievstatus
+//           },
+//         },
+//         { new: true } // Return the updated document
+//       );
+  
+//       // Handle case where grievance is not found
+//       if (!updatedGrievance) {
+//         return res.status(404).json({ message: 'Grievance not found.' });
+//       }
+  
+//       // Send success response
+//       res.status(200).json({
+//         message: 'Grievance updated successfully.',
+//         grievance: updatedGrievance,
+//       });
+//     } catch (error) {
+//       console.error('Error updating grievance:', error);
+//       res.status(500).json({ message: 'Internal Server Error', error });
+//     }
+//   };
+
+
+
+
 exports.updateGrievanceStatusAndComment = async (req, res) => {
     try {
       const { id } = req.params; // Grievance ID from the URL
-      const { comment, grievstatus } = req.body; // Extract comment and grievstatus from the request body
+      const { comment, grievstatus} = req.body; // Extract fields from the request body
   
-      // Validate input
-      if (!id || comment === undefined || grievstatus === undefined) {
-        return res.status(400).json({ message: 'ID, comment, and grievstatus are required.' });
+      // Validate if all required fields are provided
+      if (!id || comment === undefined || grievstatus === undefined ) {
+        return res.status(400).json({
+          message: 'ID, comment, grievstatus are required.',
+        });
       }
   
-      // Find and update the grievance by ID
+      // Find the grievance by ID and update the fields
       const updatedGrievance = await Register.findByIdAndUpdate(
         id,
-        { 
-          $set: { 
+        {
+          $set: {
             comment, // Update comment
             grievstatus, // Update grievstatus
+            // dealtby, // Update dealtBy
           },
         },
         { new: true } // Return the updated document
@@ -338,6 +429,9 @@ exports.updateGrievanceStatusAndComment = async (req, res) => {
       res.status(500).json({ message: 'Internal Server Error', error });
     }
   };
+
+
+
 
 
 //   fetch data by designation
@@ -377,3 +471,48 @@ exports.fetchDataByGrievanceCategory = async (req, res) => {
         });
     }
 };
+
+
+
+// this is for update grievance status on clicking resolved button
+exports.resolveGrievanceStatus = async (req, res) => {
+    try {
+      const { id } = req.params; // Grievance ID from the URL
+      const { grievstatus } = req.body; // Extract grievstatus from the request body
+  
+      // Validate required fields (ID and grievstatus only)
+      if (!id || grievstatus === undefined) {
+        return res.status(400).json({
+          message: 'ID and grievstatus are required.',
+        });
+      }
+  
+      // Ensure the status is "1" (Resolved)
+      if (grievstatus !== "1") {
+        return res.status(400).json({
+          message: 'Invalid status. Only "1" is allowed for resolving.',
+        });
+      }
+  
+      // Update the grievance status
+      const updatedGrievance = await Register.findByIdAndUpdate(
+        id,
+        {
+          $set: { grievstatus },
+        },
+        { new: true } // Return the updated document
+      );
+  
+      if (!updatedGrievance) {
+        return res.status(404).json({ message: 'Grievance not found.' });
+      }
+  
+      res.status(200).json({
+        message: 'Grievance resolved successfully.',
+        grievance: updatedGrievance,
+      });
+    } catch (error) {
+      console.error('Error resolving grievance:', error);
+      res.status(500).json({ message: 'Internal Server Error', error });
+    }
+  };

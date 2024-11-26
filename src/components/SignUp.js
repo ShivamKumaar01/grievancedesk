@@ -176,7 +176,7 @@ const SignUp = () => {
 
       if (response.ok) {
         toast.success('Account created successfully');
-        navigate('/dashboard');
+        navigate('/admin');
       } else {
         toast.error('Error: ' + result.message);
       }

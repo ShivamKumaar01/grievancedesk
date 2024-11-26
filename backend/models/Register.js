@@ -64,6 +64,9 @@ const registerSchema=new mongoose.Schema({
     },
     flag:{
         type:Boolean,
+    },
+    dealtby:{
+        type:String,
     }
 
    

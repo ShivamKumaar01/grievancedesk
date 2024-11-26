@@ -138,7 +138,7 @@ const StatusF = ({ grievanceId }) => {
           <p><strong>Mobile:</strong> {grievanceData.mobile}</p>
         </div>
         <div className="right2">
-          <p><strong>Designation:</strong> Department Head</p>
+          {/* <p><strong>Designation:</strong> Department Head</p> */}
           <p><strong>Mail:</strong> {grievanceData.email}</p>
         </div>
       </div>

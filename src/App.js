@@ -15,6 +15,7 @@ import SignUp from './components/SignUp';
 import Dashboard from './components/Dashboard';
 import CardDetails from './components/CardDetails';
 
+
 function App() {
   return (
     <div className="App">
