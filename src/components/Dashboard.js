@@ -313,7 +313,17 @@ const Dashboard = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const designation = location.state?.designation; // Admin's designation
+  // const designation = location.state?.designation;
+  const { designation, name } = location.state || {}; // Admin's designation
+  console.log(designation);
+  console.log(name);
+  // const name=location.state?.name;
+  // console.log(name);
+  // console.log(location.state)
+  // console.log(location.state)
+  // console.log(location.state?.designation);
+  // const name=location.state?.name;
+  // console.log('admin Name :',name);
 
   // Log to check if the designation is correctly passed
   console.log('Admin Designation:', designation);
@@ -356,7 +366,7 @@ const Dashboard = () => {
     console.log(`Applying filter for status: ${status}`);
     
     // Ensure grievancecategory is used instead of designation
-    const adminDesignation = 'hostel';  // Example: admin designation is 'hostel'
+    const adminDesignation = designation;  // Example: admin designation is 'hostel'
     
     // Show all posts that match the admin's grievance category
     if (status === 'all') {
@@ -437,19 +447,27 @@ const Dashboard = () => {
               onClick={() => handleCardClick(postItem)}
             >
               <div className="w-7/12 bg-slate-100 rounded-lg shadow-md p-4">
+              
+              
                 <h3 className="text-left font-bold">{postItem.grievancecategory}</h3>
-                <h3 className="text-left font-thin">Name: {postItem.name}</h3>
-                <h3 className="text-left font-thin">URN: {postItem.urn}</h3>
-                <h3 className="text-left font-thin">Department: {postItem.department}</h3>
-                <h3 className="text-left font-thin">Description: {postItem.grievancedescription}</h3>
-                <h3 className="text-left font-thin">ID: {postItem._id}</h3>
+                <h3 className="text-right font-bold">{postItem.updatedDate}</h3>
+                <h3 className="text-left font-bold">{name}</h3>
+                
+                <h3 className="text-left font-thin"><strong>Name:</strong> {postItem.name}</h3>
+                <h3 className="text-left font-thin"><strong>URN:</strong> {postItem.urn}</h3>
+                <h3 className="text-left font-thin"><strong>Department:</strong> {postItem.department}</h3>
+                <h3 className="text-left font-thin"><strong>Description:</strong> {postItem.grievancedescription}</h3>
+                <h3 className="text-left font-thin"><strong>Contact No:</strong> {postItem.mobile}</h3>
+                <h3 className="text-left font-thin"><strong>ID:</strong> {postItem._id}</h3>
               </div>
             </div>
           ))
         ) : (
           <h1>No Data Available</h1>
         )}
+      
       </div>
+      
     </div>
   );
 };

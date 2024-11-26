@@ -60,13 +60,14 @@ const Admin = () => {
       body: JSON.stringify({email:email,password:password}),
     });
     const data = await response.json();
+    console.log(data);
     if(!data.success){
       alert(data.message);
       return;
     }
 
     if(data.designation) {
-      navigate('/dashboard', { state: { designation  : data.designation } }); // Pass selected designation
+      navigate('/dashboard', { state: { designation  : data.designation,name:data.name } }); // Pass selected designation
     }
     else{
       alert("error..");

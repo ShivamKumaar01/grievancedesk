@@ -76,6 +76,7 @@ import React, { useState, useEffect } from 'react';
 
 const StatusF = ({ grievanceId }) => {
   const [grievanceData, setGrievanceData] = useState(null);
+  console.log(grievanceData)
 
   // Fetch the data whenever the grievanceId changes
   useEffect(() => {
@@ -113,11 +114,13 @@ const StatusF = ({ grievanceId }) => {
       <div className="flex justify-between mb-4">
         <div className="left1">
           <p><strong>Registration ID:</strong> #{grievanceData._id}</p>
-          <p><strong>Date Submitted:</strong> {new Date(grievanceData.createdAt).toLocaleDateString()}</p>
-        </div>
-        <div className="right1">
+          <p><strong>Date Submitted:</strong> {grievanceData.updatedDate}</p>
           <p><strong>Complainant Name:</strong> {grievanceData.name}</p>
           <p><strong>Category of Grievance:</strong> {grievanceData.grievancecategory}</p>
+          <p><strong>Comment:</strong> {grievanceData.comment}</p>
+        </div>
+        <div className="right1">
+        
         </div>
       </div>
 

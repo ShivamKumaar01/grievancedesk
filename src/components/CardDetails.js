@@ -237,8 +237,10 @@ import { useState } from 'react';
 
 
 const CardDetails = ({ adminEmail }) => {
+  
   const location = useLocation();
   const { post } = location.state;
+  console.log(post);
 
   const [isCommentBoxVisible, setIsCommentBoxVisible] = useState(false);
   const [comment, setComment] = useState('');
@@ -348,11 +350,15 @@ const CardDetails = ({ adminEmail }) => {
     <div className="flex justify-center items-center mt-10">
       <div className="w-7/12 bg-slate-100 rounded-lg shadow-md p-4">
         <h1 className="text-left font-bold text-2xl mb-4">{post.grievancecategory}</h1>
-        <h3 className="text-left font-thin">Name: {post.name}</h3>
-        <h3 className="text-left font-thin">URN: {post.urn}</h3>
-        <h3 className="text-left font-thin">Department: {post.department}</h3>
-        <h3 className="text-left font-thin">Description: {post.grievancedescription}</h3>
-        <h3 className="text-left font-thin">ID: {post._id}</h3>
+        <h3 className="text-left font-thin"><strong>Name: {post.name}</strong></h3>
+        <h3 className="text-left font-thin"><strong>URN:</strong> {post.urn}</h3>
+        <h3 className="text-left font-thin"><strong>Department:</strong> {post.department}</h3>
+        <h3 className="text-left font-thin"><strong>Year:</strong> {post.year}</h3>
+        <h3 className="text-left font-thin"><strong>Description:</strong> {post.grievancedescription}</h3>
+        <h3 className="text-left font-thin"><strong>ID:</strong> {post._id}</h3>
+        <h3 className="text-left font-thin"><strong>Comment:</strong> {post.comment}</h3>
+        
+
         <h3 className="text-left font-thin">Dealt By: {dealtBy}</h3>
         <h3 className="text-left font-thin">
           Status: {grievstatus === "-1" ? 'New' : grievstatus === "0" ? 'Processing' : 'Resolved'}
